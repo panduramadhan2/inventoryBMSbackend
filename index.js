@@ -25,7 +25,8 @@ db.once("open", () => console.log("Database Connected..."));
 app.use(
   cors({
     // origin: "http://127.0.0.1:5000/",
-    origin: "*",
+    // origin: "*",
+    origin: "https://inventorybms.onrender.com",
     // credentials: true,
     // withCredentials: false,
     // optionSuccessStatus: 200,
