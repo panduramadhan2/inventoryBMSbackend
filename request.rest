@@ -1,0 +1,41 @@
+GET http://127.0.0.1:5000/inventories
+
+###
+GET http://127.0.0.1:5000/inventories/64bf81ebaa821462a53243e4
+
+###
+POST http://127.0.0.1:5000/inventories
+Content-Type: application/json
+
+{
+    "noAsset" : "LEN156/IDEAPAD 320-14/SK/PF0TXOKX/005/TELE",
+    "merk": "LENOVO 80XG",
+    "type": "80XG",
+    "serialNumber" : "PF0TXOKX",
+    "pengguna": "MBAK HELDA/CS SC2",
+    "lokasiTerbaru": "JOGJA SPEEDCASH",
+    "kondisi" : "Normal",
+    "mouse": "LOGITECH M100R",
+    "mousepad": "ada",
+    "headset" : "LOGITECH" ,
+    "keterangan" : "Milik Bimasakti" 
+}
+###
+PATCH  http://127.0.0.1:5000/inventories/64bf83256ea74fa0ee369522
+Content-Type: application/json
+
+{
+    "noAsset" : "HP090/14-AC181TU/5CG611269PQ/0171",
+    "merk": "LENOVO 80XG2",
+    "type": "80XG3",
+    "serialNumber" : "PF0TXOKX4",
+    "pengguna": "MBAK WULAN/CS SC11",
+    "lokasiTerbaru": "JOGJA SPEEDCASH1",
+    "kondisi" : "Normal1",
+    "mouse": "LOGITECH M100R1",
+    "mousepad": "ada1",
+    "headset" : "LOGITECH1" ,
+    "keterangan" : "Milik Bimasakti ganti nuc"
+}
+###
+DELETE   http://127.0.0.1:5000/inventories/64bf83276ea74fa0ee369528
