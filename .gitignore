@@ -24,3 +24,5 @@ yarn-error.log*
 
 # Ignore .env file
 .env
+# serviceAccountKey
+serviceAccountKey.json

@@ -3,14 +3,14 @@ import mongoose from "mongoose";
 import cors from "cors";
 import Inventory from "./routes/InventoryRoute.js";
 import dotenv from "dotenv";
+import admin from 'firebase-admin';
+import { serviceAccount } from "./configManager.js";
+
 
 dotenv.config();
 const app = express();
 const connectionStr = process.env.MONGO_CONNECTION;
-// mongoose.connect("mongodb://127.0.0.1:27017/inventory_db", {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-// });
+
 mongoose.connect(connectionStr, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -20,21 +20,32 @@ const db = mongoose.connection;
 db.on("error", (error) => console.log(error));
 db.once("open", () => console.log("Database Connected..."));
 
-// app.use(cors());
-// app.use(cors({ origin: "http://127.0.0.1:5000/", credentials: true }));
-app.use(
-  cors({
-    // origin: "http://127.0.0.1:5000/",
-    // origin: "*",
-    // origin: ["*", "https://inventorybms.onrender.com"],
-    origin: "https://inventorybms.onrender.com",
-    // origin: "https://inventorybms.onrender.com/",
-    // credentials: true,
-    // withCredentials: false,
-    // optionSuccessStatus: 200,
-    credentials: true,
-  })
-);
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  // databaseURL: 'YOUR_FIREBASE_DATABASE_URL',
+});
+
+async function setCustomClaims(email, claims) {
+  try {
+    const user = await admin.auth().getUserByEmail(email);
+    await admin.auth().setCustomUserClaims(user.uid, claims);
+    return true;
+  } catch (error) {
+    console.error('Error setting custom claims:', error);
+    return false;
+  }
+}
+
+// Set custom claims for the admin and user roles
+// Replace 'pandu@gmail.com' and 'bambang@gmail.com' with the actual email addresses
+setCustomClaims('pandu@gmail.com', { role: 'admin' });
+setCustomClaims('bambang@gmail.com', { role: 'user' });
+
+app.use(cors({
+  origin: "https://inventorybms.onrender.com",
+  credentials: true,
+}));
+
 
 app.use(express.json());
 app.use(Inventory);
