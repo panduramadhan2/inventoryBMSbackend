@@ -6,7 +6,6 @@ import dotenv from "dotenv";
 import admin from 'firebase-admin';
 import { serviceAccount } from "./configManager.js";
 
-
 dotenv.config();
 const app = express();
 const connectionStr = process.env.MONGO_CONNECTION;
