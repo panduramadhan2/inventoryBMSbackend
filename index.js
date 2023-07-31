@@ -4,8 +4,7 @@ import cors from "cors";
 import Inventory from "./routes/InventoryRoute.js";
 import dotenv from "dotenv";
 import admin from 'firebase-admin';
-// import { serviceAccount } from "./configManager.js";
-const { serviceAccount } = require("./configManager.js");
+import { serviceAccount } from "./configManager.js"; // Use import
 
 dotenv.config();
 const app = express();
