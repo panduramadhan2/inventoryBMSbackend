@@ -1,5 +1,6 @@
-const fs = require('fs');
-const path = require('path');
+// configManager.js
+import fs from 'fs';
+import path from 'path';
 
 const configFile = path.join(__dirname, './serviceAccountKey.json');
 
@@ -15,4 +16,4 @@ function loadServiceAccountKey() {
 
 const serviceAccount = loadServiceAccountKey();
 
-module.exports = { serviceAccount };
+export { serviceAccount }; // Use export instead of module.exports
